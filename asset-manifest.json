@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/HACK-IT-ON/static/css/main.cb12d82a.css",
-    "main.js": "/HACK-IT-ON/static/js/main.b8b8dc04.js",
+    "main.js": "/HACK-IT-ON/static/js/main.cf1b9d70.js",
     "index.html": "/HACK-IT-ON/index.html",
     "main.cb12d82a.css.map": "/HACK-IT-ON/static/css/main.cb12d82a.css.map",
-    "main.b8b8dc04.js.map": "/HACK-IT-ON/static/js/main.b8b8dc04.js.map"
+    "main.cf1b9d70.js.map": "/HACK-IT-ON/static/js/main.cf1b9d70.js.map"
   },
   "entrypoints": [
     "static/css/main.cb12d82a.css",
-    "static/js/main.b8b8dc04.js"
+    "static/js/main.cf1b9d70.js"
   ]
 }
