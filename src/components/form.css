@@ -90,7 +90,7 @@ form .form-inp-field{
 @media only screen and (max-width: 1000px) {
     .form{
        
-    margin: 5% 20% 5%;
+    margin: 5% 10% 5%;
     }
     .form div {
         padding: 15px;
@@ -120,3 +120,97 @@ form .form-inp-field{
 
 
 
+/* Alert Box CSS */
+
+/* .alertDiv{
+    height: 100vh;
+    position: absolute;
+    z-index: 999;
+} */
+
+.alert-container {
+    width: 100%;
+    position: fixed;
+    bottom: 40px;
+    display: none;
+    justify-content: center;
+    z-index: 999;
+    transition: 2s ease-in;
+  }
+  .alert-container-show {
+    display: flex;
+  }
+  
+  .alert-box {
+    height: 60px;
+    background-color: #228c22;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 5px;
+    width: calc(300px + 10vw);
+    border-left: 5px solid #003700;
+  }
+  .alert-box.show {
+    animation: show_pop 1s ease forwards;
+  }
+  @keyframes show_pop {
+    0% {
+      transform: translateY(100%);
+    }
+    40% {
+      transform: translateY(-10%);
+    }
+    80% {
+      transform: translateY(0%);
+    }
+    100% {
+      transform: translateY(-10%);
+    }
+  }
+  .alert-box.hide {
+    animation: hide_pop 1s ease forwards;
+  }
+  @keyframes hide_pop {
+    0% {
+      transform: translateY(-10%);
+    }
+    40% {
+      transform: translateY(0%);
+    }
+    80% {
+      transform: translateY(-10%);
+    }
+    100% {
+      transform: translateY(155%);
+    }
+  }
+  .alert-contant h1 {
+    width: 100%;
+    text-align: left;
+    font-size: inherit;
+    color: white;
+  }
+  
+  .alert-contant hr {
+    height: 2px;
+  }
+  
+  .alert-contant form {
+    display: flex;
+    height: 0%;
+    flex-direction: unset;
+    justify-content: unset;
+    align-items: unset;
+  }
+  
+  .alert-contant form .alert--ok-btn {
+    margin: auto;
+    background-color: green;
+    color: white;
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 0.2rem 0.3rem;
+    margin-top: -15px;
+    cursor: pointer;
+  }
+  

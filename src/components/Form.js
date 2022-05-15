@@ -1,10 +1,14 @@
 import React, { useContext, useState } from 'react'
+import useHistory from 'use-history'
 import { FirebaseContext } from '../store/Contexts'
 import "./form.css"
+
 // import { Firebase } from '../firebase/config'
 
 
 function Form() {
+    const history = useHistory
+
     const { firebase } = useContext(FirebaseContext)
     const [regNo, setRegNo] = useState(0)
     const [teamname, setTName] = useState("")
@@ -20,47 +24,72 @@ function Form() {
     const [teamMemb3, setTeamMemb3] = useState("")
     const [contactMemb3, setContactMemb3] = useState("")
     const [emailMemb3, setEmailMemb3] = useState("")
+    const [url, setUrl] = useState('')
 
-    // const [image, setImage] = useState('');
+    function guardarArchivo(e) {
+        var file = e.target.files[0] //the file
+        var reader = new FileReader() //this for convert to Base64 
+        reader.readAsDataURL(e.target.files[0]) //start conversion...
+        reader.onload = function (e) { //.. once finished..
+            var rawLog = reader.result.split(',')[1]; //extract only thee file data part
+            var dataSend = { dataReq: { data: rawLog, name: file.name, type: file.type }, fname: "uploadFilesToGoogleDrive" }; //preapre info to send to API
+            fetch('https://script.google.com/macros/s/AKfycbyL2FI2-qqMHHPbjV-wUJY7IHPO_Ixueq0kTEkaQLjJhl9qwo7qiT5yD77LngX89szZOQ/exec', //your AppsScript URL
+                { method: "POST", body: JSON.stringify(dataSend) }) //send to Api
+                .then(res => res.json()).then((a) => {
+                    console.log(a.url) //See response
+                    setUrl(a.url)
+                }).catch(e => console.log(e)) // Or Error in console
+        }
+    }
+    const okFunc = () => {
+        var pop = document.getElementById("pop")
+        var popcont = document.getElementById("popcont")
+        pop.classList.remove("hide")
+        pop.classList.add("show")
+        popcont.classList.add("alert-container-show")
+        setTimeout(() => {
+            pop.classList.remove("show")
+            pop.classList.add("hide")
+        }, 5000)
+    }
+    const closeFunc = () => {
+        var pop = document.getElementById("pop")
+        pop.classList.remove("show")
+        pop.classList.add("hide")
+    }
 
-    // const upload = () => {
-    //     if (image == null)
-    //         return;
-    //      Firebase.storage.ref(`/images/${image.name}`).put(image)
-    //         .on("state_changed", alert("success"), alert);
-    // }
     firebase.firestore().collection('Registration Number').doc('unique').get().then((res) => {
         setRegNo(res.data().number)
     })
 
-    const handleSubmit = () => {
-        // e.preventDefault()
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
         firebase.firestore().collection('Registration Number').doc('unique').update({
             number: regNo + 1
         })
-        // firebase.storage().ref('/image/name').put(image).then(({ ref }) => {
-        //     ref.getDownloadURL().then((url) => {
-        //         console.log(url);
-        //     })
-        // })
+
         firebase.firestore().collection('TEAMS').add(
             {
-                "Registration number": regNo,
-                "Team Name": teamname,
-                "Team Captain": teamCaptain,
-                "Contact team cap": contactTC,
-                "Email team cap": emailTC,
-                "Tema memb 1": teamMemb1,
-                "Contact team memb 1": contactMemb1,
-                "Email team memb 1": emailMemb1,
-                "Tema memb 2": teamMemb2,
-                "Contact team memb 2": contactMemb2,
-                "Email team memb 2": emailMemb2,
-                "Tema memb 3": teamMemb3,
-                "Contact team memb 3": contactMemb3,
-                "Email team memb 3": emailMemb3
+                "Registration_number": regNo,
+                "Team_Name": teamname,
+                "Team_Captain_Name": teamCaptain,
+                "Contact_team_cap": contactTC,
+                "Email_team_cap": emailTC,
+                "Tema_memb_1": teamMemb1,
+                "Contact_team_memb_1": contactMemb1,
+                "Email_team_memb_1": emailMemb1,
+                "Tema_memb_2": teamMemb2,
+                "Contact_team_memb_2": contactMemb2,
+                "Email_team_memb_2": emailMemb2,
+                "Tema_memb_3": teamMemb3,
+                "Contact_team_memb_3": contactMemb3,
+                "Email_team_memb_3": emailMemb3,
+                "file_Url": url
             }).then((alert) => {
                 console.log("suscces");
+                okFunc()
+                setTimeout(history.go(0), 4000)
             });
 
     }
@@ -68,11 +97,11 @@ function Form() {
         <div>
             <div className='form'>
                 <div>
-                    <form>
+                    <form method='get'>
                         <div className='form-inp-field'>
                             <div className='form-field'>
-                                <label> Resitration number</label><br /><br />
-                                <input type="number" name="name" value={regNo} required='required' disabled /><br /><br />
+                                {/* <label> Resitration number</label><br /><br />
+                                <input type="number" name="name" value={regNo} required='required' disabled /><br /><br /> */}
                                 <label> Team Name</label><br /><br />
                                 <input type="text" name="name" value={teamname} onChange={(e) => setTName(e.target.value)} placeholder='Name' required='required' /><br /><br />
                                 <label> Team Captain</label><br /><br />
@@ -104,21 +133,33 @@ function Form() {
                                 <label> Team Member 3</label><br /><br />
                                 <input type="text" name="name" value={teamMemb3} onChange={(e) => setTeamMemb3(e.target.value)} placeholder='Name' /><br /><br />
                                 <label> Contact (Team Member 3)</label><br /><br />
-                                <input type="text" name="name" value={contactMemb3} onChange={(e) => setContactMemb3(e.target.value)} placeholder='Phone Number' /><br /><br />
+                                <input type="number" name="name" value={contactMemb3} onChange={(e) => setContactMemb3(e.target.value)} placeholder='Phone Number' /><br /><br />
                                 <label> Email (Team Member 3)</label><br /><br />
                                 <input type="text" name="name" value={emailMemb3} onChange={(e) => setEmailMemb3(e.target.value)} placeholder='yourname@gamil.com' /><br />
                             </div>
                             <div>
-                                <label htmlFor="">PDF File</label>
-                                {/* <img height="100px" width="200px" alt="" src={image ? URL.createObjectURL(image) : null} /> */}
-                                <input type="file"/* onChange={(e) => { setImage(e.target.files[0]) }}*/ />
+                                <label htmlFor="">Your Abstract</label>
+                                <input type="file" accept="application/pdf" id="customFile" onChange={(e) => guardarArchivo(e)} />
                             </div>
 
                         </div>
 
                         <input type="submit" value="Submit" id='submit' onClick={handleSubmit} />
                     </form>
-
+                    <div className="alertDiv">
+                        <div id="popcont" className="alert-container">
+                            <div id="pop" className="alert-box hide">
+                                <div className="alert-contant">
+                                    <h1>Succsess</h1>
+                                    <hr />
+                                    <form>
+                                        <p>Submission Successfull, Thankyou</p>
+                                        <button className="alert--ok-btn" onClick={closeFunc}>Ok</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
