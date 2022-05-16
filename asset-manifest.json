@@ -1,14 +1,16 @@
 {
   "files": {
-    "main.css": "/HACK-IT-ON/static/css/main.f341cdfd.css",
-    "main.js": "/HACK-IT-ON/static/js/main.610d3b70.js",
-    "static/media/CIVISTA.png": "/HACK-IT-ON/static/media/CIVISTA.e31dbd6277e6e70e4220.png",
+    "main.css": "/HACK-IT-ON/static/css/main.a8846a03.css",
+    "main.js": "/HACK-IT-ON/static/js/main.96e2103a.js",
+    "static/media/emergebg.jpg": "/HACK-IT-ON/static/media/emergebg.9e3d4f6e5174ea9f9457.jpg",
+    "static/media/CIVISTAbg.jpg": "/HACK-IT-ON/static/media/CIVISTAbg.ee2cc23a3898b58881bd.jpg",
+    "static/media/MECHAURAbg.jpg": "/HACK-IT-ON/static/media/MECHAURAbg.01dfebfd57fbf1632359.jpg",
     "index.html": "/HACK-IT-ON/index.html",
-    "main.f341cdfd.css.map": "/HACK-IT-ON/static/css/main.f341cdfd.css.map",
-    "main.610d3b70.js.map": "/HACK-IT-ON/static/js/main.610d3b70.js.map"
+    "main.a8846a03.css.map": "/HACK-IT-ON/static/css/main.a8846a03.css.map",
+    "main.96e2103a.js.map": "/HACK-IT-ON/static/js/main.96e2103a.js.map"
   },
   "entrypoints": [
-    "static/css/main.f341cdfd.css",
-    "static/js/main.610d3b70.js"
+    "static/css/main.a8846a03.css",
+    "static/js/main.96e2103a.js"
   ]
 }
