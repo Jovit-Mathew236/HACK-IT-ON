@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { FirebaseContext } from '../store/Contexts'
 import './Dashboard.css'
 
@@ -9,21 +9,22 @@ function Dashboard() {
     // firebase.firestore().collection('Registration Number').doc('unique').get().then((res) => {
     //     setRegNo(res.data().number)
     // })
-    // useEffect((e) => {
-    //     e.preventDefault()
-
-    // })
-    firebase.firestore().collection('TEAMS').get().then((snapshot) => {
-        const alldocs = snapshot.docs.map((team) => {
-
-            return {
-                ...team.data(),
-                // id: team.id
-
-            }
+    useEffect(() => {
+        
+        firebase.firestore().collection('TEAMS').get().then((snapshot) => {
+            const alldocs = snapshot.docs.map((team) => {
+    
+                return {
+                    ...team.data(),
+                    // id: team.id
+    
+                }
+            })
+            setTeams(alldocs)
         })
-        setTeams(alldocs)
-    })
+    },[firebase])
+    
+    
     console.log(teams);
     return (
         <div>
@@ -47,12 +48,14 @@ function Dashboard() {
                                 <th>Team Member 3</th>
                                 <th>Contact <br /> (Team Member 3)</th>
                                 <th>Email <br /> (Team Member 3)</th>
-                                <th>Abstract</th>
+                                <th>Abstract link</th>
                             </tr>
                         </thead>
                         <tbody>
                             {teams.map((team, index) => {
+                                console.log(team.file_Url)
                                 return (<tr key={index}>
+                                    
                                     <td>{team.Registration_number}</td>
                                     <td>{team.Team_Name}</td>
                                     <td>{team.Team_Captain_Name}</td>
@@ -67,7 +70,7 @@ function Dashboard() {
                                     <td>{team.Tema_memb_3}</td>
                                     <td>{team.Contact_team_memb_3}</td>
                                     <td>{team.Email_team_memb_3}</td>
-                                    <td>{team.file_Url}</td>
+                                    <td><a href={`${team.filr_Url}`} target="_blank" rel="noopener noreferrer">{team.file_Url}</a></td>
                                 </tr>)
 
                             })}

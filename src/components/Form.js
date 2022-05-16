@@ -1,13 +1,13 @@
 import React, { useContext, useState } from 'react'
-import useHistory from 'use-history'
+import { unstable_HistoryRouter } from 'react-router-dom'
+import Uploadi from '../assets/Uploadi'
 import { FirebaseContext } from '../store/Contexts'
 import "./form.css"
-
 // import { Firebase } from '../firebase/config'
 
 
 function Form() {
-    const history = useHistory
+    const history = unstable_HistoryRouter
 
     const { firebase } = useContext(FirebaseContext)
     const [regNo, setRegNo] = useState(0)
@@ -36,11 +36,12 @@ function Form() {
             fetch('https://script.google.com/macros/s/AKfycbyL2FI2-qqMHHPbjV-wUJY7IHPO_Ixueq0kTEkaQLjJhl9qwo7qiT5yD77LngX89szZOQ/exec', //your AppsScript URL
                 { method: "POST", body: JSON.stringify(dataSend) }) //send to Api
                 .then(res => res.json()).then((a) => {
-                    console.log(a.url) //See response
                     setUrl(a.url)
-                }).catch(e => console.log(e)) // Or Error in console
+                    console.log(a.url) //See response
+                }).catch(err => console.log(err)) // Or Error in console
         }
     }
+    // allet box Function
     const okFunc = () => {
         var pop = document.getElementById("pop")
         var popcont = document.getElementById("popcont")
@@ -56,13 +57,16 @@ function Form() {
         var pop = document.getElementById("pop")
         pop.classList.remove("show")
         pop.classList.add("hide")
-    }
+    }// alert box function close
 
+
+    // calling resitration number
     firebase.firestore().collection('Registration Number').doc('unique').get().then((res) => {
         setRegNo(res.data().number)
     })
 
 
+    // submit btn function
     const handleSubmit = (e) => {
         e.preventDefault()
         firebase.firestore().collection('Registration Number').doc('unique').update({
@@ -138,8 +142,8 @@ function Form() {
                                 <input type="text" name="name" value={emailMemb3} onChange={(e) => setEmailMemb3(e.target.value)} placeholder='yourname@gamil.com' /><br />
                             </div>
                             <div>
-                                <label htmlFor="">Your Abstract</label>
-                                <input type="file" accept="application/pdf" id="customFile" onChange={(e) => guardarArchivo(e)} />
+                                <label htmlFor="customFile" className="custom-file-upload"><Uploadi/> Upload your abstract here 🤗</label>
+                                <input type="file" accept="application/pdf" id="customFile" onChange={(e) => guardarArchivo(e)} required/>
                             </div>
 
                         </div>

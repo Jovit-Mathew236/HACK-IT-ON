@@ -82,6 +82,7 @@ form .form-inp-field{
     border-radius: 5px;
     transition: ease-in .2s;
     border-color: #5a5a5a;
+    cursor: pointer;
 }
 .form #submit:hover{
     background: rgba(22, 18, 18, 0.79);;
@@ -214,3 +215,15 @@ form .form-inp-field{
     cursor: pointer;
   }
   
+form input[type="file"] {
+    display: none;
+}
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  color: #0040ff;
+  border-radius: 5px;
+  box-shadow: 2px 3px 11px -4px #1b1b1bc2;
+}
