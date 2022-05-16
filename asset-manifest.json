@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/HACK-IT-ON/static/css/main.ddef3b6f.css",
-    "main.js": "/HACK-IT-ON/static/js/main.1d4fea52.js",
+    "main.js": "/HACK-IT-ON/static/js/main.20d1c186.js",
     "static/media/emergebg.jpg": "/HACK-IT-ON/static/media/emergebg.9e3d4f6e5174ea9f9457.jpg",
     "static/media/CIVISTAbg.jpg": "/HACK-IT-ON/static/media/CIVISTAbg.ee2cc23a3898b58881bd.jpg",
     "static/media/MECHAURAbg.jpg": "/HACK-IT-ON/static/media/MECHAURAbg.01dfebfd57fbf1632359.jpg",
     "static/media/RADIANCEbg.jpg": "/HACK-IT-ON/static/media/RADIANCEbg.a8f4f3606be4c880d876.jpg",
     "index.html": "/HACK-IT-ON/index.html",
     "main.ddef3b6f.css.map": "/HACK-IT-ON/static/css/main.ddef3b6f.css.map",
-    "main.1d4fea52.js.map": "/HACK-IT-ON/static/js/main.1d4fea52.js.map"
+    "main.20d1c186.js.map": "/HACK-IT-ON/static/js/main.20d1c186.js.map"
   },
   "entrypoints": [
     "static/css/main.ddef3b6f.css",
-    "static/js/main.1d4fea52.js"
+    "static/js/main.20d1c186.js"
   ]
 }
